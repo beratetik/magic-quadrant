@@ -5,7 +5,7 @@ const get = (key) => {
 }
 
 const set = (key, value) => {
-  const item = value
+  let item = value
   
   if ((typeof value === 'object' && value !== null) || Array.isArray(value)) {
     item = JSON.stringify(value)

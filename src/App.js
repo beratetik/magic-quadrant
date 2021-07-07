@@ -1,25 +1,42 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect, useState } from 'react'
+
+import { useLocalStorage } from './shared/hooks'
+import { initialState, defaultItem, header } from './shared/config'
+
+import { Chart, Table } from './components'
+import { Wrapper } from './styles'
 
 function App() {
+  const [item, setItem] = useState(null)
+  const [itemList, setItemList] = useLocalStorage("items", initialState)
+
+  const onDelete = (index) => {
+    setItemList(itemList.filter((_, i) => i !== index))
+  }
+
+  const onChange = (e, i, property) => {
+    setItemList(() => {
+      const list = [...itemList]
+
+      list[i][property] = e.target.value
+      return [...list]
+    })
+  }
+
+  const addItem = () => { 
+    setItemList([
+      ...itemList,
+      {...defaultItem}
+    ])
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <Wrapper>
+      <Chart {...{ item, setItem, itemList, setItemList }} />
+      <Table {...{ addItem, header, itemList, onChange, onDelete }} />
+    </Wrapper>
+  )
 }
 
-export default App;
+export default App
+

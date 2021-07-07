@@ -44,7 +44,7 @@ const Table = ({ addItem, itemList, header, ...rest }) => (
       onClick={addItem}
     />
     <Header {...{ header }} />
-    {itemList?.map((item, index) => <Row key={index} {...{ item, ...rest }} />)}
+    {itemList?.map((item, index) => <Row key={index} {...{ item, index, ...rest }} />)}
   </TableWrapper>
 )
 

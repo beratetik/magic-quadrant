@@ -9,43 +9,31 @@ const Header = ({ header }) => (
   </RowWrapper>
 )
 
-const Row = ({ }) => {
-  
-  return (
-    <RowWrapper></RowWrapper>
-  )
-}
-
-const List = ({ header, itemList, onChange, onDelete }) => (
-  <>
-    <Header {...{ header }} />
-    {itemList?.map((item, index) =>
-      <RowWrapper key={index}>
-        <Input
-          value={item.label}
-          onChange={(e) => onChange(e, index, "label")}
-          {...item}
-        />
-        <Input
-          value={item.x}
-          type="number"
-          onChange={(e) => onChange(e, index, "x")}
-          {...item}
-        />
-        <Input
-          value={item.y}
-          type="number"
-          onChange={(e) => onChange(e, index, "y")}
-          {...item}
-        />
-        <Input
-          value="Delete"
-          onClick={() => onDelete(index)}
-          type="button"
-        />
-      </RowWrapper> 
-    )}
-  </>
+const Row = ({ item, index, onChange, onDelete }) => (
+  <RowWrapper>
+    <Input
+      value={item.label}
+      onChange={(e) => onChange(e, index, "label")}
+      {...item}
+    />
+    <Input
+      value={item.x}
+      type="number"
+      onChange={(e) => onChange(e, index, "x")}
+      {...item}
+    />
+    <Input
+      value={item.y}
+      type="number"
+      onChange={(e) => onChange(e, index, "y")}
+      {...item}
+    />
+    <Input
+      value="Delete"
+      onClick={() => onDelete(index)}
+      type="button"
+    />
+  </RowWrapper>
 )
 
 const Table = ({ addItem, ...rest }) => (
@@ -55,7 +43,8 @@ const Table = ({ addItem, ...rest }) => (
       value="Add"
       onClick={addItem}
     />
-    <List {...rest} />
+    <Header {...{ header }} />
+    {itemList?.map((item, index) => <Row key={index} {...{ item, ...rest }} />)}
   </TableWrapper>
 )
 

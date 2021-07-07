@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 import { useLocalStorage } from './shared/hooks'
 import { initialState, defaultItem, header } from './shared/config'

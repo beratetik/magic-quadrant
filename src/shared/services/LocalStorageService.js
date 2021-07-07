@@ -14,7 +14,9 @@ const set = (key, value) => {
   window.localStorage.setItem(key, item)
 }
 
-export default {
+const Storage = {
   get,
   set
 }
+
+export default Storage

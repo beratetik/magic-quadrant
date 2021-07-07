@@ -36,7 +36,7 @@ const Row = ({ item, index, onChange, onDelete }) => (
   </RowWrapper>
 )
 
-const Table = ({ addItem, ...rest }) => (
+const Table = ({ addItem, itemList, header, ...rest }) => (
   <TableWrapper>
     <AddItemButton
       type="button"
